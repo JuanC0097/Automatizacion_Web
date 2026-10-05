@@ -26,7 +26,7 @@ function getUserArrowFuntion(username : string): User | undefined {
 }
 
 //Validate Funtion- Funcion asincrona
-//await la pagina hace las esperas
+//promesa sin resolver.
  async function validateError(page : Page): Promise<boolean> {
     return await page.locator('[data-test="error"]').isVisible();
 }
@@ -70,6 +70,9 @@ test("Login whith locked out user", async({page}) =>{
     await page.getByRole("button", { name: "login"}).click();
 
     const result: boolean = await validateError(page);
+    //las aserciones en paywricht se hacen con expect 
+    //para lo que esperamos para entrar. 
     expect(result, "Expect rror message not found = true").toBe(true);
+    //expect(result, "Expect rror message not found = true").toBeTruthy(true);
 });
 
