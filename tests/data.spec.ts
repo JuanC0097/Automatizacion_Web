@@ -46,4 +46,41 @@ test("Login whith locked out user", async({page}) =>{
     await page.getByRole("button", { name: "login"}).click();
 
 });
+// Ejercicio Propio
+test("Select radio button page", async ({ page }) => {
+
+    await page.goto("https://demoqa.com/radio-button");
+
+    // Seleccionar la opción Yes
+    await page.getByText("Yes").click();
+
+    // Validar el mensaje
+    await expect(page.locator(".text-success"))
+        .toHaveText("Yes");
+});
+
+//ejercio edi
+test("Click on buttons page", async ({ page }) => {
+
+    await page.goto("https://demoqa.com/buttons");
+
+    // Click normal
+    await page.getByRole("button", { name: "Click Me" }).click();
+
+    await expect(page.locator("#dynamicClickMessage"))
+        .toHaveText("You have done a dynamic click");
+
+    // Doble click
+    await page.getByRole("button", { name: "Double Click Me" }).dblclick();
+
+    await expect(page.locator("#doubleClickMessage"))
+        .toHaveText("You have done a double click");
+
+    // Click derecho
+    await page.getByRole("button", { name: "Right Click Me" })
+        .click({ button: "right" });
+
+    await expect(page.locator("#rightClickMessage"))
+        .toHaveText("You have done a right click");
+});
 
